@@ -1,0 +1,53 @@
+<%- include("header") -%>
+<style>
+    #aboutPage{
+        font-size: 14px;
+        border: 1px solid black;
+        border-radius: 3px;
+        cursor: pointer;
+        width: 100px;
+    }
+
+</style>
+<body>
+    <div class="box" id="heading">
+        <h1> <%= pageTitle %> </h1>
+    </div>
+    
+    <div class="box">
+        <ul class="toDoListUl">
+            <% for ( let i = 0; i < addNewItems.length; i++ ){ %>
+                <% if ( addNewItems[i] == "REPEATED"){ %>
+                    <div class="item">
+                        <h3> Your to-do is repeated </h3>
+                    </div>
+                    <% addNewItems.pop() %>
+                <% }else{ %>
+                    <div class="item">
+                        <input type="checkbox">
+                        <p><%= addNewItems[i] %></p>
+                    </div>  
+                <% } %>
+            <% } %>
+        </ul>
+
+        <form action="/" method="post">
+            <input type="text" name="newToDo" id="newToDo" placeholder="Add new items" autocomplete="off">
+            <button type="submit" name="whatTitle" value=<%= pageTitle %>>+</button>
+        </form>
+    </div>
+
+    <!-- navigation to about page -->
+    <button id="aboutPage">About Page</button>
+    <a href="/about">About Page link</a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        $("#aboutPage").click(changeLocation);
+        function changeLocation(){
+            // Setting location to about page on clicking the button
+            window.location = "/about"
+        }
+    </script>
+
+<%- include("footer") -%>
